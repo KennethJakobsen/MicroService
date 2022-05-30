@@ -7,4 +7,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Rebus" />
+    <None Remove="Rebus.RabbitMq" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Rebus" Version="6.6.5" />
+    <PackageReference Include="Rebus.RabbitMq" Version="7.3.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Customer\Customer.Messages\Customer.Messages.csproj" />
+  </ItemGroup>
 </Project>
