@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  customer.api:
+    image: ${DOCKER_REGISTRY-}customer
+    build:
+      context: src/Customer/Customer.Api/
+
+  customer.worker:
+    image: ${DOCKER_REGISTRY-}customer
+    build:
+      context: src/Customer/Customer.Worker/
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    
+
