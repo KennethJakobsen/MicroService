@@ -14,6 +14,9 @@ services:
     build:
       context: src/Customer/Customer.Worker/
       dockerfile: Dockerfile
+    environment:
+      - DOTNET_ConnectionStrings__RabbitMq=amqp://guest:guest@rabbitmq:5672/
+      - DOTNET_Messaging__InputQueue=customer-input
   rabbitmq:
     image: rabbitmq:management
     container_name: 'rabbitmq'
@@ -23,5 +26,16 @@ services:
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-    
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: 'db'
+    environment:
+       SA_PASSWORD: "test"
+       ACCEPT_EULA: "Y"
+    ports:
+       - 1433:1433
+    volumes:
+       - ~/.docker-conf/mssql/data/:/var/opt/mssql/data
+       - ~/.docker-conf/mssql/log/:/var/opt/mssql/log
+       - ~/.docker-conf/mssql/backup/:/var/opt/mssql/backup
 
