@@ -14,6 +14,7 @@ RUN dotnet build "Customer/Customer.Api/Customer.Api.csproj" -c Release -o /app/
 FROM build AS publish
 RUN dotnet publish "Customer/Customer.Api/Customer.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
+
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

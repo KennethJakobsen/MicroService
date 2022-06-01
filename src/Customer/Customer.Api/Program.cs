@@ -20,7 +20,7 @@ static void RegisterExternals(IServiceCollection services)
 
     IConfiguration config = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
     string sql = config.GetValue<string>("ConnectionStrings:SqlServer");
-
+    Console.WriteLine(sql);
     services.AddDbContext<CustomerContext>(options =>
     {
         options.UseSqlServer(sql, b => b.MigrationsAssembly(typeof(Program).Assembly.FullName));
@@ -30,11 +30,9 @@ static void RegisterExternals(IServiceCollection services)
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseAuthorization();
 

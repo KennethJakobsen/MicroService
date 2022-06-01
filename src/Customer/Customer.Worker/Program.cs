@@ -40,6 +40,7 @@ static void RegisterExternals(IServiceCollection services)
         .Routing(r => r.TypeBased().MapAssemblyOf<CreateNewCustomerCommand>(wc.InputQueueName));
     });
 
+    
     services.AddDbContext<CustomerContext>(options =>
     {
         options.UseSqlServer(wc.SqlServer, b => b.MigrationsAssembly(typeof(Program).Assembly.FullName));

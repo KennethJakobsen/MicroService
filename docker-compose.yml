@@ -3,23 +3,38 @@ version: '3.4'
 services:
   customer.api:
     image: ${DOCKER_REGISTRY-}customer.api
+    depends_on:
+      - db
     build:
       context: src/
       dockerfile: Customer/Customer.Api/Dockerfile
     ports:
       - 5010:80
     environment:
-      - DOTNET_ConnectionStrings__SqlServer=Server=localhost;Database=customer;User Id=sa;Password=Passw@rd;Encrypted=False
+      - ASPNETCORE_ConnectionStrings__SqlServer=Server=db;Database=customer;User Id=sa;Password=Passw@rd;Encrypt=false
+      - ASPNETCORE_ENVIRONMENT=Production
+    links:
+      - db
+
 
   customer.worker:
     image: ${DOCKER_REGISTRY-}customer.worker
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      db:
+        condition: service_started
     build:
       context: src/
       dockerfile: Customer/Customer.Worker/Dockerfile
     environment:
       - DOTNET_ConnectionStrings__RabbitMq=amqp://guest:guest@rabbitmq:5672/
-      - DOTNET_ConnectionStrings__SqlServer=Server=localhost;Database=customer;User Id=sa;Password=Passw@rd;Encrypted=False
+      - DOTNET_ConnectionStrings__SqlServer=Server=db;Database=customer;User Id=sa;Password=Passw@rd;Encrypt=false
       - DOTNET_Messaging__InputQueue=customer-input
+    links:
+      - db
+      - rabbitmq
+
   rabbitmq:
     image: rabbitmq:management
     container_name: 'rabbitmq'
@@ -29,6 +44,12 @@ services:
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    healthcheck:
+        test: rabbitmq-diagnostics -q ping
+        interval: 30s
+        timeout: 30s
+        retries: 3
+
   db:
     image: "mcr.microsoft.com/azure-sql-edge:latest"
     container_name: 'db'
@@ -40,6 +61,7 @@ services:
        - MSSQL_USER=SA
        - MSSQL_PASSWORD=Passw@rd
        - MSSQL_DB_AUDIT_LOG=events_service_audit_log
+  
     ports:
        - 1433:1433
     volumes:
