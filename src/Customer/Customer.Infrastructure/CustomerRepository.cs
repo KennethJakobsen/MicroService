@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Customer.Domain.Interfaces;
@@ -16,6 +17,12 @@ namespace Customer.Infrastructure
         {
             this.context = context;
         }
+
+        public async Task<List<CustomerModel>> FetchAllAsync()
+        {
+            return await context.Customers.ToListAsync();
+        }
+
         public async Task<CustomerModel> FetchAsync(Guid id)
         {
             return await context.Customers.FirstOrDefaultAsync(c => c.Id == id);

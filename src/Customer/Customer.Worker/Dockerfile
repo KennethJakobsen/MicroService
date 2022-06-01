@@ -6,13 +6,13 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Customer.Worker.csproj", "."]
+COPY ["Customer/Customer.Worker/Customer.Worker.csproj", "."]
 RUN dotnet restore "Customer.Worker.csproj"
 COPY . .
-RUN dotnet build "Customer.Worker.csproj" -c Release -o /app/build
+RUN dotnet build "Customer/Customer.Worker/Customer.Worker.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Customer.Worker.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Customer/Customer.Worker/Customer.Worker.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

@@ -4,19 +4,21 @@ services:
   customer.api:
     image: ${DOCKER_REGISTRY-}customer.api
     build:
-      context: src/Customer/Customer.Api/
-      dockerfile: Dockerfile
+      context: src/
+      dockerfile: Customer/Customer.Api/Dockerfile
     ports:
       - 5010:80
+    environment:
+      - DOTNET_ConnectionStrings__SqlServer=Server=localhost;Database=customer;User Id=sa;Password=Passw@rd;Encrypted=False
 
   customer.worker:
     image: ${DOCKER_REGISTRY-}customer.worker
     build:
-      context: src/Customer/Customer.Worker/
-      dockerfile: Dockerfile
+      context: src/
+      dockerfile: Customer/Customer.Worker/Dockerfile
     environment:
       - DOTNET_ConnectionStrings__RabbitMq=amqp://guest:guest@rabbitmq:5672/
-      - DOTNET_ConnectionStrings__SqlServer=Server=localhost;Database=customer;User Id=sa;Password=Passw@rd
+      - DOTNET_ConnectionStrings__SqlServer=Server=localhost;Database=customer;User Id=sa;Password=Passw@rd;Encrypted=False
       - DOTNET_Messaging__InputQueue=customer-input
   rabbitmq:
     image: rabbitmq:management
