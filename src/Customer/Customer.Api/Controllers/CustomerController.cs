@@ -15,15 +15,13 @@ public class CustomerController : ControllerBase
         this.repo = repo;
     }
 
-    [HttpGet]
-    [Route("/")]
+    [HttpGet("", Name = "ListAllCustomers")]
     public async Task<IEnumerable<CustomerModel>> List()
     {
         return await repo.FetchAllAsync();
     }
 
-    [HttpGet]
-    [Route("{id}")]
+    [HttpGet("{id}", Name = "GetCustomerById")]
     public async Task<ActionResult<CustomerModel>> Get(string id)
     {
         if (!Guid.TryParse(id, out var guid))
