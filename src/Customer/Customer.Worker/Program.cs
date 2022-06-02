@@ -27,9 +27,13 @@ static void RegisterExternals(IServiceCollection services)
     
     IConfiguration config = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
 
-    string rabbit = config.GetValue<string>("ConnectionStrings:RabbitMq");
-    string sql = config.GetValue<string>("ConnectionStrings:SqlServer");
-    string input = config.GetValue<string>("Messaging:InputQueue");
+    string? rabbit = config.GetValue<string>("ConnectionStrings:RabbitMq");
+    string? sql = config.GetValue<string>("ConnectionStrings:SqlServer");
+    string? input = config.GetValue<string>("Messaging:InputQueue");
+
+    if (rabbit is null || sql is null || input is null)
+        throw new Exception("Configuration not configured correctly - please fix");
+
     var wc = new WorkerConfiguration(rabbit, input, sql);
 
     services.AddRebus((configure, provider) =>

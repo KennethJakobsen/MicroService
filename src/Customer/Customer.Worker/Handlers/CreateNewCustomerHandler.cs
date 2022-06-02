@@ -2,6 +2,7 @@
 using Customer.Domain.Interfaces;
 using Customer.Infrastructure;
 using Customer.Messages;
+using Rebus.Bus;
 using Rebus.Handlers;
 
 namespace Customer.Worker.Handlers
@@ -10,6 +11,7 @@ namespace Customer.Worker.Handlers
     {
         private readonly ILogger<Worker> logger;
         private readonly IPersistCustomers repo;
+        private readonly IBus bus;
 
         public async Task Handle(CreateNewCustomerCommand message)
         {
@@ -18,12 +20,14 @@ namespace Customer.Worker.Handlers
                 Id = message.Id,
                 Name = message.Name
             });
+            await bus.Publish(new CustomerCreatedEvent(message.Id));
         }
 
-        public CreateNewCustomerHandler(ILogger<Worker> logger, IPersistCustomers repo)
+        public CreateNewCustomerHandler(ILogger<Worker> logger, IPersistCustomers repo, IBus bus)
 		{
             this.logger = logger;
             this.repo = repo;
+            this.bus = bus;
         }
 	}
 }

@@ -43,8 +43,9 @@
     <Folder Include="Handlers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Customer.Messages\Customer.Messages.csproj" />
     <ProjectReference Include="..\Customer.Infrastructure\Customer.Infrastructure.csproj" />
     <ProjectReference Include="..\Customer.Domain\Customer.Domain.csproj" />
+    <ProjectReference Include="..\Customer.Messages.External\Customer.Messages.External.csproj" />
+    <ProjectReference Include="..\Customer.Messages\Customer.Messages.csproj" />
   </ItemGroup>
 </Project>
