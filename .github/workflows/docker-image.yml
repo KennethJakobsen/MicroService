@@ -23,13 +23,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Customer Worker Docker image
-      run: docker build src --file Customer/Customer.Worker/Dockerfile --tag customer/customer.worker:dev-$(date +%s)
+      run: docker build src --file src/Customer/Customer.Worker/Dockerfile --tag customer/customer.worker:dev-$(date +%s)
   build-api:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Build the Customer Worker Docker image
-      run: docker build src --file Customer/Customer.Api/Dockerfile --tag customer/customer.api:dev-$(date +%s)
+      run: docker build src --file src/Customer/Customer.Api/Dockerfile --tag customer/customer.api:dev-$(date +%s)
   acr_push:
     runs-on: ubuntu-latest
     steps:
