@@ -33,9 +33,9 @@ jobs:
       uses: docker/build-push-action@v3.0.0
       with:
         # Build's context is the set of files located in the specified PATH or URL
-        context: /src
+        context: src
         # Path to the Dockerfile
-        file: /src/Customer/Customer.Worker/Dockerfile
+        file: src/Customer/Customer.Worker/Dockerfile
         # Push is a shorthand for output=type=registry
         push: true
         # List of tags
@@ -55,9 +55,9 @@ jobs:
       uses: docker/build-push-action@v3.0.0
       with:
         # Build's context is the set of files located in the specified PATH or URL
-        context: /src
+        context: src
         # Path to the Dockerfile
-        file: /src/Customer/Customer.Api/Dockerfile
+        file: src/Customer/Customer.Api/Dockerfile
         # Push is a shorthand for output=type=registry
         push: true
         # List of tags
