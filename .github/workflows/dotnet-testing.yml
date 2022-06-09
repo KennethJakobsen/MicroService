@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore test/Customer/Customer.Tests.Unit/Customer.Tests.Unit.csproj
+      run: dotnet restore test/Customer.Tests.Unit/Customer.Tests.Unit.csproj
     - name: Build
-      run: dotnet build test/Customer/Customer.Tests.Unit/Customer.Tests.Unit.csproj --no-restore
+      run: dotnet build test/Customer.Tests.Unit/Customer.Tests.Unit.csproj --no-restore
     - name: Test
-      run: dotnet test test/Customer/Customer.Tests.Unit/Customer.Tests.Unit.csproj --no-build --verbosity normal
+      run: dotnet test test/Customer.Tests.Unit/Customer.Tests.Unit.csproj --no-build --verbosity normal
