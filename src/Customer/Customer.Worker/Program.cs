@@ -1,4 +1,5 @@
-﻿using Customer.Domain.Interfaces;
+﻿
+using Customer.Domain.Interfaces;
 using Customer.Infrastructure;
 using Customer.Infrastructure.EF.Contexts;
 using Customer.Messages;
@@ -14,6 +15,7 @@ var builder = Host.CreateDefaultBuilder(args);
 builder.ConfigureServices((Action<IServiceCollection>)(services =>
 {
     services.AddHostedService<Worker>();
+    //services.AddHostedService<Customer.HttpHealthcheck>();
     services.AddTransient<IPersistCustomers, CustomerRepository>();
     services.AutoRegisterHandlersFromAssemblyOf<CreateNewCustomerHandler>();
     RegisterExternals(services);
@@ -35,7 +37,6 @@ static void RegisterExternals(IServiceCollection services)
         throw new Exception("Configuration not configured correctly - please fix");
 
     var wc = new WorkerConfiguration(rabbit, input, sql);
-
     services.AddRebus((configure, provider) =>
     {
         return configure

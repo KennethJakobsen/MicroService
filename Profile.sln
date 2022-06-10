@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.Tests.Unit", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.ApiClient", "src\Customer\Customer.ApiClient\Customer.ApiClient.csproj", "{B18A47B1-6185-46AE-AAF2-7FE0179DE886}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{850B60E2-3FB9-4D0E-972C-548297BE6B71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.Api", "src\Gateway\Gateway.Api\Gateway.Api.csproj", "{9B081BAA-D14C-42EB-A40F-03163838D444}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,10 @@ Global
 		{B18A47B1-6185-46AE-AAF2-7FE0179DE886}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B18A47B1-6185-46AE-AAF2-7FE0179DE886}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B18A47B1-6185-46AE-AAF2-7FE0179DE886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B081BAA-D14C-42EB-A40F-03163838D444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B081BAA-D14C-42EB-A40F-03163838D444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B081BAA-D14C-42EB-A40F-03163838D444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B081BAA-D14C-42EB-A40F-03163838D444}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +100,6 @@ Global
 		{60F09F55-4EA2-49E2-92F6-22AF052B9347} = {741CD151-B50A-4C32-A939-67E8E1678E8F}
 		{DC419C22-3A11-44CE-B5CE-E72114FC7264} = {60F09F55-4EA2-49E2-92F6-22AF052B9347}
 		{B18A47B1-6185-46AE-AAF2-7FE0179DE886} = {16CDA131-4F99-4A7F-9B9B-5AD06C1AE862}
+		{9B081BAA-D14C-42EB-A40F-03163838D444} = {850B60E2-3FB9-4D0E-972C-548297BE6B71}
 	EndGlobalSection
 EndGlobal
