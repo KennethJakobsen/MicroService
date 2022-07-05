@@ -18,9 +18,5 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '6.x'
-    - name: Restore dependencies
-      run: dotnet restore test/Customer.Tests.Unit/Customer.Tests.Unit.csproj
-    - name: Build
-      run: dotnet build test/Customer.Tests.Unit/Customer.Tests.Unit.csproj --no-restore
     - name: Test
       run: dotnet test test/Customer.Tests.Unit/Customer.Tests.Unit.csproj
