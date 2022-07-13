@@ -12,14 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore test/Customer.Tests.Unit/Customer.Tests.Unit.csproj
-    - name: Build
-      run: dotnet build test/Customer.Tests.Unit/Customer.Tests.Unit.csproj --no-restore
+        dotnet-version: '6.x'
+    - name: Restore Api dependencies
+      run: dotnet restore src/Customer/Customer.Api/Customer.Api.csproj
+    - name: Build Api
+      run: dotnet build src/Customer/Customer.Api/Customer.Api.csproj --no-restore
+    - name: Restore worker dependencies
+      run: dotnet restore src/Customer/Customer.Worker/Customer.Worker.csproj
+    - name: Build worker
+      run: dotnet build src/Customer/Customer.Worker/Customer.Worker.csproj --no-restore
     - name: Test
-      run: dotnet test test/Customer.Tests.Unit/Customer.Tests.Unit.csproj --no-build --verbosity normal
+      run: dotnet test test/Customer.Tests.Unit/Customer.Tests.Unit.csproj
