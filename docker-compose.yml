@@ -1,8 +1,27 @@
 version: '3.4'
 
 services:
-  customer.api:
-    image: ${DOCKER_REGISTRY-}customer.api
+  gateway-api:
+    image: gateway-api
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      customer.api:
+        condition: service_started
+      db:
+        condition: service_started
+    build:
+      context: src/
+      dockerfile: Gateway/Gateway.Api/Dockerfile
+    ports:
+      - 5555:80
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    links:
+      - customer-api
+
+  customer-api:
+    image: customer-api
     depends_on:
       - db
     build:
@@ -16,9 +35,8 @@ services:
     links:
       - db
 
-
-  customer.worker:
-    image: ${DOCKER_REGISTRY-}customer.worker
+  customer-worker:
+    image: customer-worker
     depends_on:
       rabbitmq:
         condition: service_healthy

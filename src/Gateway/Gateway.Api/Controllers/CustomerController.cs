@@ -17,8 +17,7 @@ public class CustomerController : ControllerBase
     {
         _logger = logger;
         _bus = bus;
-        _apiClient = new CustomerApi("http://worker.api");
-
+        _apiClient = new CustomerApi("http://customer-api:5010");
     }
 
     [HttpGet(Name = "ListAllCustomers")]
