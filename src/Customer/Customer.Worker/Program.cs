@@ -12,14 +12,13 @@ using Rebus.Routing.TypeBased;
 
 var builder = Host.CreateDefaultBuilder(args);
 
-builder.ConfigureServices((Action<IServiceCollection>)(services =>
+builder.ConfigureServices(services =>
 {
     services.AddHostedService<Worker>();
-    //services.AddHostedService<Customer.HttpHealthcheck>();
     services.AddTransient<IPersistCustomers, CustomerRepository>();
     services.AutoRegisterHandlersFromAssemblyOf<CreateNewCustomerHandler>();
     RegisterExternals(services);
-}));
+});
    var host = builder.Build();
 
 await host.RunAsync();

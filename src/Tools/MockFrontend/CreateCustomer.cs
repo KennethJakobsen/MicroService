@@ -1,11 +1,27 @@
 ﻿using System;
+using Gateway.ApiClient.Api;
+
 namespace MockFrontend
 {
-	public class CreateCustomer
+	public class CreateCustomer : IInteractWithGateway
 	{
-		public CreateCustomer()
+        private readonly CustomerApi client;
+
+        public CreateCustomer(CustomerApi client)
 		{
-		}
-	}
+            this.client = client;
+        }
+
+        public string Description => "Create new customer";
+
+        public async Task SendAsync()
+        {
+            Console.WriteLine("Please enter customer name:");
+
+            var name = Console.ReadLine();
+
+            await client.CreateNewCustomerAsync(name);
+        }
+    }
 }
 

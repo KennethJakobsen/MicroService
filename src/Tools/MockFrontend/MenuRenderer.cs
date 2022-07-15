@@ -1,15 +1,16 @@
 ﻿using System;
+using Gateway.ApiClient.Api;
 using Rebus.Bus;
 
-namespace EventEmitter
+namespace MockFrontend
 {
 	public class MenuRenderer
 	{
-		private Dictionary<string, ISendEvent> _collection;
-		public MenuRenderer(IBus bus)
+		private Dictionary<string, IInteractWithGateway> _collection;
+		public MenuRenderer(CustomerApi client)
 		{
-			_collection = new Dictionary<string, ISendEvent>();
-			_collection.Add("a", new CreateNewCustomerSender(bus));
+			_collection = new Dictionary<string, IInteractWithGateway>();
+			_collection.Add("a", new CreateCustomer(client));
 		}
 
 		public async Task RunMenu()

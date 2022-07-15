@@ -13,15 +13,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IFetchCustomers, CustomerRepository>();
-RegisterExternals(builder.Services);
+RegisterExternals(builder);
 
-static void RegisterExternals(IServiceCollection services)
+static void RegisterExternals(WebApplicationBuilder builder)
 {
-
-    IConfiguration config = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
-    string sql = config.GetValue<string>("ConnectionStrings:SqlServer");
+    string sql = builder.Configuration.GetValue<string>("ConnectionStrings:SqlServer");
     Console.WriteLine(sql);
-    services.AddDbContext<CustomerContext>(options =>
+    builder.Services.AddDbContext<CustomerContext>(options =>
     {
         options.UseSqlServer(sql, b => b.MigrationsAssembly(typeof(Program).Assembly.FullName));
     });

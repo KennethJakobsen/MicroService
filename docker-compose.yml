@@ -14,8 +14,9 @@ services:
       context: src/
       dockerfile: Gateway/Gateway.Api/Dockerfile
     ports:
-      - 5555:80
+      - 5010:80
     environment:
+      - ASPNETCORE_Services__Customer=http://customer-api
       - ASPNETCORE_ENVIRONMENT=Production
     links:
       - customer-api
@@ -28,7 +29,7 @@ services:
       context: src/
       dockerfile: Customer/Customer.Api/Dockerfile
     ports:
-      - 5010:80
+      - 5020:80
     environment:
       - ASPNETCORE_ConnectionStrings__SqlServer=Server=db;Database=customer;User Id=sa;Password=Passw@rd;Encrypt=false
       - ASPNETCORE_ENVIRONMENT=Production

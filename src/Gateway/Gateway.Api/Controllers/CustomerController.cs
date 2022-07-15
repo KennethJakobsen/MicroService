@@ -13,17 +13,22 @@ public class CustomerController : ControllerBase
     public readonly ILogger<CustomerController> _logger;
     private readonly IBus _bus;
     public readonly CustomerApi _apiClient;
-    public CustomerController(ILogger<CustomerController> logger, IBus bus)
+    public CustomerController(ILogger<CustomerController> logger, IBus bus, CustomerApi api)
     {
         _logger = logger;
         _bus = bus;
-        _apiClient = new CustomerApi("http://customer-api:5010");
+        _apiClient = api;
     }
 
     [HttpGet(Name = "ListAllCustomers")]
-    public async Task<IEnumerable<CustomerModel>> ListAll()
+    public async Task<List<CustomerModel>> ListAll()
     {
         return await _apiClient.ListAllCustomersAsync();
+    }
+    [HttpGet("{id}", Name = "GetCustomerById")]
+    public async Task<ActionResult<CustomerModel>> Get(string id)
+    {
+        return await _apiClient.GetCustomerByIdAsync(id);
     }
 
     [HttpPost(Name = "CreateNewCustomer")]

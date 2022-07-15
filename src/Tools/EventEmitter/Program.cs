@@ -9,5 +9,6 @@ var bus = Configure.With(new BuiltinHandlerActivator())
     .Routing(r => r.TypeBased().Map<CreateNewCustomerCommand>("customer-input"))
     .Start();
 
+
 var renderer = new MenuRenderer(bus);
 await renderer.RunMenu();

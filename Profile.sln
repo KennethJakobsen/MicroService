@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Primitives", "FlexyBox.Prim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockFrontend", "src\Tools\MockFrontend\MockFrontend.csproj", "{65E2784A-FBB9-419B-9574-8612D2ED939B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.ApiClient", "src\Gateway\Gateway.ApiClient\Gateway.ApiClient.csproj", "{F7243394-2D30-4D42-B5D4-37B4C82E5F38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{65E2784A-FBB9-419B-9574-8612D2ED939B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65E2784A-FBB9-419B-9574-8612D2ED939B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65E2784A-FBB9-419B-9574-8612D2ED939B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7243394-2D30-4D42-B5D4-37B4C82E5F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7243394-2D30-4D42-B5D4-37B4C82E5F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7243394-2D30-4D42-B5D4-37B4C82E5F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7243394-2D30-4D42-B5D4-37B4C82E5F38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,5 +123,6 @@ Global
 		{9B081BAA-D14C-42EB-A40F-03163838D444} = {850B60E2-3FB9-4D0E-972C-548297BE6B71}
 		{39E32258-8A3B-4717-ADD2-ED79483694CE} = {691A54BE-E9D9-4FEE-B3E8-C504D7871ADB}
 		{65E2784A-FBB9-419B-9574-8612D2ED939B} = {0BA4956E-C256-4805-A3E9-87F49C26CD9D}
+		{F7243394-2D30-4D42-B5D4-37B4C82E5F38} = {850B60E2-3FB9-4D0E-972C-548297BE6B71}
 	EndGlobalSection
 EndGlobal

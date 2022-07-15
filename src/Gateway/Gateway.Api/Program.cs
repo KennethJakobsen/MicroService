@@ -1,4 +1,5 @@
 ﻿
+using Customer.ApiClient.Api;
 using Customer.Messages;
 using Rebus.Config;
 using Rebus.Routing.TypeBased;
@@ -16,8 +17,12 @@ builder.Services.AddRebus((configure, provider) => {
         .Transport(t => t.UseRabbitMqAsOneWayClient("amqp://guest:guest@rabbitmq:5672/"))
         .Routing(r => r.TypeBased().MapAssemblyOf<CreateNewCustomerCommand>("customer-input"));
 });
-var app = builder.Build();
 
+string custUrl = builder.Configuration.GetValue<string>("Services:Customer");
+builder.Services.AddSingleton(new CustomerApi(custUrl));
+
+
+var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -25,4 +30,3 @@ app.UseSwaggerUI();
 app.MapControllers();
 
 app.Run();
-

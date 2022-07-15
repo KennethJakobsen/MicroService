@@ -14,10 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Customer\Customer.ApiClient\Customer.ApiClient.csproj">
+    <ProjectReference Include="..\..\Customer\Customer.Messages\Customer.Messages.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="..\..\Customer\Customer.Messages\Customer.Messages.csproj">
+    <ProjectReference Include="..\..\Customer\Customer.ApiClient\Customer.ApiClient.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

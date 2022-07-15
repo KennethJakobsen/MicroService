@@ -1,10 +1,9 @@
 ﻿using System;
-namespace EventEmitter
-{
-	public interface ISendEvent
+namespace MockFrontend;
+
+	public interface IInteractWithGateway
 	{
 		string Description { get; }
 		Task SendAsync();
 	}
-}
 
