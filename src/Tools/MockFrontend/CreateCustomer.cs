@@ -14,7 +14,7 @@ namespace MockFrontend
 
         public string Description => "Create new customer";
 
-        public async Task SendAsync()
+        public async Task ExecuteAsync()
         {
             Console.WriteLine("Please enter customer name:");
 

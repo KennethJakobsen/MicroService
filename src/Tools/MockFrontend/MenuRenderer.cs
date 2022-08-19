@@ -11,6 +11,7 @@ namespace MockFrontend
 		{
 			_collection = new Dictionary<string, IInteractWithGateway>();
 			_collection.Add("a", new CreateCustomer(client));
+			_collection.Add("b", new ListCustomers(client));
 		}
 
 		public async Task RunMenu()
@@ -18,17 +19,21 @@ namespace MockFrontend
 			Console.WriteLine("Please choose below:");
 			foreach(var kvp in _collection)
             {
-				Console.WriteLine($"{kvp.Key})\t\t{kvp.Value.Description}");
+				Console.WriteLine($"{kvp.Key})\t{kvp.Value.Description}");
             }
+            
 
-			Console.WriteLine("Enter your choice:");
+            Console.WriteLine("Enter your choice:");
 			var choice = Console.ReadLine();
+            Console.Write("\n\n");
 
-			if (_collection.ContainsKey(choice.ToLower()))
-				await _collection[choice].SendAsync();
+            if (_collection.ContainsKey(choice.ToLower()))
+				await _collection[choice].ExecuteAsync();
 			else
-				Console.WriteLine("Invalid choice! Pleas try again!");
-			await RunMenu();
+				Console.WriteLine("Invalid choice! Please try again!");
+            Console.Write("\n\n");
+
+            await RunMenu();
         }
 	}
 }
