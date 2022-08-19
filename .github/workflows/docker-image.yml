@@ -21,20 +21,9 @@ jobs:
     - run: |
         docker build src -f src/Customer/Customer.Worker/Dockerfile -t ${{ secrets.ACR_LOGIN_SERVER }}/customer/customer.worker:latest
         docker push ${{ secrets.ACR_LOGIN_SERVER }}/customer/customer.worker:latest  
-  build-and-push-customer-api:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: azure/docker-login@v1
-      with:
-      # Container registry username
-        username: ${{ secrets.ACR_USERNAME }}
-      # Container registry password
-        password: ${{ secrets.ACR_PASSWORD }}
-      # Container registry server url
-        login-server: https://${{ secrets.ACR_LOGIN_SERVER }}
-    - run: |
         docker build src -f src/Customer/Customer.Api/Dockerfile -t ${{ secrets.ACR_LOGIN_SERVER }}/customer/customer.api:latest
         docker push ${{ secrets.ACR_LOGIN_SERVER }}/customer/customer.api:latest  
+        docker build src -f src/Gateway/Gateway.Api/Dockerfile -t ${{ secrets.ACR_LOGIN_SERVER }}/gateway/gateway.api:latest
+        docker push ${{ secrets.ACR_LOGIN_SERVER }}/gateway/gateway.api:latest  
 
 
